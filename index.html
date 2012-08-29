@@ -1,0 +1,29 @@
+﻿<html>
+<head>
+<script src="./jquery-1.7.2.min.js"></script>
+<script>
+	var w=$(window);
+	
+	w.bind("paste",function(e){
+			var items=e.originalEvent.clipboardData.items;
+			var file;
+            var reader = new FileReader();
+			for(var i=0;i<items.length;i++){
+				var item=items[i];
+				if(/image/.test(item.type)){
+					file = item.getAsFile();
+					console.log(item.type);	
+					console.log(file);
+					var url=window.webkitURL.createObjectURL(file);
+					console.log(url);
+					$("h1").after("<img src='"+url+"'>");
+				}			
+			}
+			reader.readAsDataURL(file);
+	});
+</script>
+</head>
+<body>
+<h1>testes</h1>
+</body>
+</html>
